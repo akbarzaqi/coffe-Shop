@@ -1,0 +1,30 @@
+class Menu Item 
+	* idMenu
+	* name
+	* price
+	* category
+	* stok
+	
+class OrderItem
+	* idItem
+	* namaMenu
+	* qty
+	* subtotal
+	
+class Payment
+	* idPayment
+	* idUser
+	* username
+	* customerName
+	* itemList
+	* orderTime
+	* status (pending, paid, cancell)
+	* paymentMethod
+	* totalPrice
+
+class User
+	* idUser
+	* username
+	* password
+	* noTelp
+
