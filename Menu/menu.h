@@ -23,7 +23,10 @@ private:
 public:
     DataMenu menu[MAX];
 
-    Menu();
+    Menu()
+    {
+       init();
+    }
     void init();
     void addMenu(string menu_item, int price, int stock, string category);
     void showMenu();
@@ -32,15 +35,9 @@ public:
     void updateMenu();
     bool isEmpty();
     bool isFull();
+    bool checkString(string menu_item, string menu);
     int countData();
 
    
 };
-
-
-
-
-
-
-
-#endif 
+#endif

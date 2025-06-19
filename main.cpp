@@ -3,11 +3,14 @@
 #include "Menu/menu.h"
 using namespace std;
 
-User user;
-Menu menu;
+
+
+    User user;
+    Menu menu;
 
 int main() 
 {
+
     user.addUser("akbarzaqi", "123", "0895363163250");
     user.addUser("joko  ", "123", "0895363163250");
     user.addUser("budi", "123", "0895363163250");
@@ -25,7 +28,10 @@ int main()
     {
         cout << "akun anda tidak terdaftar" << endl;
     }
-
-    menu.showMenu();
+    
+    // menu.showMenu();
+    // menu.delMenu(1);
+    // menu.showMenu();
+    menu.searchMenu("n");
    
 }

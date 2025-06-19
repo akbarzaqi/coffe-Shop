@@ -94,7 +94,7 @@ void User::showUser()
     else
     {
         cout << "=== DATA USER ===" << endl;
-
+        
         cout << left
              << setw(10) << "ID User"
              << setw(20) << "Username"
