@@ -32,6 +32,6 @@ int main()
     // menu.showMenu();
     // menu.delMenu(1);
     // menu.showMenu();
-    menu.searchMenu("n");
-   
+    // cout << menu.countText("hallo");
+   menu.searchMenu("an");
 }

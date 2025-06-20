@@ -106,28 +106,39 @@ void Menu::showMenu()
     }
 }
 
-bool Menu::checkString(string menu_item, string menu)
+int Menu::countText(string text)
 {
-    for(int i = 0; i < countData(); i++)
+    int i = 0;
+    while(text[i] != '\0')
     {
-        for(int j = 0; i < countData(); j++)
-        {
-            cout << "menu item : " << menu_item[i] << endl;
-            cout << "menu : " << menu[j] << endl;
-            if(menu_item[i] == menu[j])
-            {
-                return true;
-                break;
-            }
-        }
+        // cout << text[i] << " ";
+        i++;
     }
 
+    return i;
+}
+
+bool Menu::checkString(string menu_item, string textMenu)
+{
+    int n = countText(menu_item);
+    int m = countText(textMenu);
+
+    for (int i = 0; i <= n - m; i++) {
+        int j;
+        for (j = 0; j < m; j++) {
+            if (menu_item[i + j] != textMenu[j])
+                break;
+        }
+    
+        if (j == m  )
+            return true;
+    }
     return false;
 
     
 }
 
-void Menu::searchMenu(string menu_item)
+void Menu::searchMenu(string textMenu)
 {
    
     if(isEmpty())
@@ -139,8 +150,8 @@ void Menu::searchMenu(string menu_item)
         int idx;
         for(int i = 0; i < countData(); i++)
         {
-            cout << checkString(menu[i].menu_item, menu_item) << endl;
-            if(checkString(menu[i].menu_item, menu_item))
+            // cout << checkString(menu[i].menu_item, textMenu) << endl;
+            if(checkString(menu[i].menu_item, textMenu))
             {
                 cout << "id menu : " << menu[i].menu_item << endl;
             }   
