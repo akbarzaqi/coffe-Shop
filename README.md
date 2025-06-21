@@ -77,12 +77,12 @@ Jika repository ini menggunakan metode kolaborasi dengan pull request, lakukan l
 - Jalankan perintah berikut di terminal kalian setelah melakukan perubahan:
 
       make u
-      ![alt text](image-1.png)
+  ![alt text](image-1.png)
 
 ### Cara Menjalankan Program
 
 - Setelah proses kompilasi selesai, jalankan perintah berikut untuk menjalankan program:
 
       ./demo
-      ![alt text](image-2.png)
+  ![alt text](image-2.png)
 
