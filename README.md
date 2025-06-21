@@ -4,11 +4,11 @@
 
 - Untuk meng-clone repository ke komputer lokal, gunakan perintah berikut di terminal atau command prompt:
 
-      git clone https://github.com/SDATA-TEAM/tugas-project.git
+      git clone https://github.com/akbarzaqi/coffe-Shop.git
 
 - Setelah berhasil di-clone, pindah ke direktori repository dengan perintah:
 
-      cd tugas-project
+      cd coffe-Shop
 
 ## 2. Menambahkan Perubahan dan Push ke Repository (kalau ada perubahan terus mau di up digithub)
 
