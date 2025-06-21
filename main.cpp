@@ -3,10 +3,8 @@
 #include "Menu/menu.h"
 using namespace std;
 
-
-
-    User user;
-    Menu menu;
+User user;
+Menu menu;
 
 int main() 
 {
@@ -20,7 +18,7 @@ int main()
     user.delUser(2);
     user.showUser();
 
-    if(user.isLogin("akbarzaqi", "1223"))
+    if(user.isLogin("akbarzaqi", "123"))
     {
         cout << "login berhasil" << endl;
     }
@@ -33,5 +31,5 @@ int main()
     // menu.delMenu(1);
     // menu.showMenu();
     // cout << menu.countText("hallo");
-   menu.searchMenu("an");
+    menu.searchMenu("ta");
 }
