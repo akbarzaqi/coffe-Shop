@@ -1,10 +1,9 @@
 #include <iostream>
+#include <string>
 #include <iomanip>
 #include "menu.h"
 
 using namespace std;
-
-
 
 bool Menu::isEmpty()
 {
@@ -45,8 +44,6 @@ void Menu::addMenu(string menu_item, int price, int stock, string category)
         menu[top].category = category;
 
         top++;
-
-        cout << "menu berhasil ditambahkan!!" << endl;
     }
 }
 
@@ -58,21 +55,25 @@ void Menu::showMenu()
     }
     else 
     {
-    cout << "===== Menu Caffe =====" << endl;
-    cout << left << setw(25) << "makanan" 
-         << setw(10) << "harga" 
-         << setw(25) << "minuman" 
-         << "harga" << endl;
+    cout << "\t\t\t\t===== Menu Caffe =====" << endl << endl;
+    cout << left 
+         << setw(5) << "ID" 
+         << setw(25) << "Makanan" 
+         << setw(10) << "Harga" 
+         << setw(5) << "ID" 
+         << setw(25) << "Minuman" 
+         << "Harga" << endl;
 
     int countFood = 0, countDrink = 0;
     for (int i = 0; i < countData(); i++) {
         string foodStr = "", drinkStr = "";
-        int prcFood = 0, prcDrink = 0;
+        int prcFood = 0, prcDrink = 0, idFood = 0, idDrink = 0;
 
         while (countFood < countData()) {
             if (menu[countFood].category == "makanan") {
                 foodStr = menu[countFood].menu_item;
                 prcFood = menu[countFood].price;
+                idFood = menu[countFood].id_menu;
                 countFood++;
                 break;
             }
@@ -87,6 +88,7 @@ void Menu::showMenu()
             if (menu[countDrink].category == "minuman") {
                 drinkStr = menu[countDrink].menu_item;
                 prcDrink = menu[countDrink].price;
+                idDrink = menu[countDrink].id_menu;
                 countDrink++;
                 break;
             }
@@ -98,10 +100,14 @@ void Menu::showMenu()
         }
         if (foodStr == "" && drinkStr == "") break;  
 
-         cout << left << setw(25) << foodStr 
-                 << setw(10) << (prcFood != 0 ? to_string(prcFood) : "") 
-                 << setw(25) << drinkStr
-                 << (prcDrink != 0 ? to_string(prcDrink) : "") << endl;
+        cout << left 
+        << setw(5)  << (idFood != 0 ? to_string(idFood) : "")
+        << setw(25) << foodStr 
+        << setw(10) << (prcFood != 0 ? to_string(prcFood) : "") 
+        << setw(5)  << (idDrink != 0 ? to_string(idDrink) : "") 
+        << setw(25) << drinkStr 
+        << (prcDrink != 0 ? to_string(prcDrink) : "") 
+        << endl;
     }
     }
 }
@@ -197,6 +203,85 @@ void Menu::delMenu(int id)
         {
             cout << "data yang ingin anda hapus tidak tersedia!!" << endl;
         }
+    }
+}
+
+void Menu::updateMenu(int id)
+{
+    int choose, newPrice, newStock, choise;
+    string newName, newCategory;
+    bool success = false;
+
+    if(isEmpty())
+    {
+        cout << "data anda kosong" << endl;
+    }
+    else 
+    {
+        int idx;
+        for(int i = 0; i < countData(); i++)
+        {
+            if(id == menu[i].id_menu)
+            {
+                idx = i;
+                break;
+            }
+        }
+
+        cout << "1. Edit nama menu" << endl;
+        cout << "2. Edit harga " << endl;
+        cout << "3. Edit stok" << endl;
+        cout << "4. Edit kategori" << endl;
+        cout << "masukan pilihan : " << endl;
+        cin >> choose;
+        cout << endl;
+
+        switch (choose)
+        {
+        case 1:
+            cin.ignore();
+            cout << "Masukan nama menu baru : ";
+            getline(cin, newName);
+            menu[idx].menu_item = newName;
+            success = true;
+            break;
+
+        case 2:
+            cout << "Masukan harga baru : ";
+            cin >> newPrice;
+            menu[idx].price = newPrice;
+            success = true;
+            break;
+
+        case 3:
+            cout << "Masukan stok baru : ";
+            cin >> newStock;
+            menu[idx].stock = newStock;
+            success = true;
+            break;
+        
+        case 4:
+            cout << "1. makanan" << endl;
+            cout << "2. minuman" << endl;
+            cout << "masukan pilihan : ";
+            cin >> choise;
+
+            if(choise == 1)
+                newCategory = "makanan";
+            else if (choise == 2)
+                newCategory = "minuman";
+            
+            menu[idx].category = newCategory;
+            success = true;
+            break;
+
+        default:
+            cout << "inputan tidak sesuai" << endl;
+            break;
+        }
+
+        if(success)
+            cout << "data berhasil diupdate!!" << endl;
     }
 }
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include "user.h"
 
 using namespace std;
@@ -130,4 +131,73 @@ bool User::isLogin(string uname, string pass)
     }
 
     return false;
+}
+
+void User::updateData(int id)
+{
+    if(isEmpty())
+    {
+        cout << "data kosong" << endl;
+    }
+    else 
+    {
+        int choose;
+        int idx;
+        string uname, pass, no_telp;
+        bool found = false;
+
+        for(int i = 0; i < countData(); i++)
+        {
+            if(id == user[i].id_user)
+            {
+                idx = i;
+                found = true;
+                break;
+            }
+          
+        }
+
+        if(found)
+        {
+            cout << "1. Edit username" << endl;
+            cout << "2. Edit password" << endl;
+            cout << "3. Edit no telp" << endl;
+            cout << "masukan pilihan : ";
+            cin >> choose;
+            cout << endl;
+            
+            switch (choose)
+            {
+            case 1:
+                cin.ignore();
+                cout << "masukan username baru : ";
+                getline(cin, uname);
+                user[idx].username = uname;
+                break;
+            
+            case 2:
+                cin.ignore();
+                cout << "masukan password baru : ";
+                getline(cin, pass);
+                user[idx].password = pass;
+                break;
+            case 3:
+                cin.ignore();
+                cout << "masukan no telp baru : ";
+                getline(cin, no_telp);
+                user[idx].no_telp = no_telp;
+                break;
+            default:
+                cout << "inputan yang anda masukan tidak sesuai" << endl;
+                break;
+            }
+        }
+        else 
+        {
+            cout << "data tidak ada" << endl;
+        }
+
+        
+
+    }
 }

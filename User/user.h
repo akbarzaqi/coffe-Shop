@@ -23,6 +23,7 @@ class User
         Data user[MAX];
         void addUser(string username, string password, string no_telp);
         void delUser(int id);
+        void updateData(int id);
         void showUser();
         bool isEmpty();
         bool isFull();

@@ -19,7 +19,7 @@ struct DataMenu
 class Menu
 {
 private:
-   int top = 0;
+    int top = 0;
 public:
     DataMenu menu[MAX];
 
@@ -32,7 +32,7 @@ public:
     void showMenu();
     void delMenu(int id);
     void searchMenu(string textMenu);
-    void updateMenu();
+    void updateMenu(int id);
     bool isEmpty();
     bool isFull();
     bool checkString(string menu_item, string textMenu);

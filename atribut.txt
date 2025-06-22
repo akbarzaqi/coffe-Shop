@@ -16,7 +16,7 @@ class Payment
 	* idUser
 	* username
 	* customerName
-	* itemList
+	* itemList (bikin struct lagi isinya sama kayak class orderItem dan dibikin array 2d)
 	* orderTime
 	* status (pending, paid, cancell)
 	* paymentMethod
