@@ -14,7 +14,7 @@ class OrderItem
 class Payment
 	* idPayment
 	* idUser
-	* username
+	* staffName
 	* customerName
 	* itemList (bikin struct lagi isinya sama kayak class orderItem dan dibikin array 2d)
 	* orderTime

@@ -2,20 +2,25 @@
 #include <string>
 #include "User/user.h"
 #include "Menu/menu.h"
+#include "Payment/payment.h"
 #include "OrderItem/orderitem.h"
 using namespace std;
 
 User user;
 Menu menu;
 OrderItem order;
+Payment payment;
+
+string g_uname, g_pass;
+bool isLogin = false;
+bool isAdmin = false;
+bool isStaff = false;
 
 int getPrice(int id);
 
 int main() 
 {
-    bool isLogin = false;
-    bool isAdmin = false;
-    bool isStaff = false;
+
     
     user.addUser("akbar", "123", "92378374723");
 
@@ -23,7 +28,7 @@ int main()
     {
         while(1)
         {
-           string uname, pass;
+          
            char answer; 
            cout << "==== LOGIN KARYAWAN ====" << endl << endl;
            cout << "apakah sudah punya akun? (y/n) : ";
@@ -33,18 +38,18 @@ int main()
            {
             cin.ignore();
             cout << "masukan username : ";
-            getline(cin, uname);
+            getline(cin, g_uname);
             cout << "masukan password : ";
-            getline(cin, pass);
+            getline(cin, g_pass);
             cout << endl;
-            if(uname == "admin" && pass == "admin")
+            if(g_uname == "admin" && g_pass == "admin")
             {
                 isAdmin = true;
                 break;
             }
             else 
             {
-                if(user.isLogin(uname, pass))
+                if(user.isLogin(g_uname, g_pass))
                 {
                     isStaff = true;
                     break;
@@ -128,14 +133,127 @@ int main()
                             cout << "maaf stok menu habis" << endl;
                         }
                     }
+                    else if (choose == 2)
+                    {
+                        int id;
+                        order.showOrderItem();
+                        cout << "\t\t\t\t === Hapus Item ===" << endl;
+                        cout << "masukan id yang ingin dihapus : ";
+                        cin >> id;
+                        order.delOrderItem(id);
+                        order.showOrderItem();
+                    }
+                    
                     else if(choose == 3)
                     {
                         order.showOrderItem();
                     }
+                    else if(choose == 4)
+                    {
+                        break;
+                    }
+                    else 
+                    {
+                        cout << "pilihan yang anda masukan tidak sesuai" << endl;
+                    }
                 }
-                
-               
                 break;
+            
+            case 2:
+                while (1)
+                {
+                    int totalPrice = 0 ;
+                    int choose;
+                    int idUser = user.user[0].id_user;
+                    int pay;
+                    int payback;
+                    char answer;
+                    char input;
+                    string staffName = g_uname;
+                    string customerName;
+                    string orderTime = "14-4-2025, 15.55";
+                    string status = "success";
+                    string paymentMethod;
+                    
+                    int idItem;
+                    string menuName;
+                    int qty;
+                    int subtotal;
+
+                    cout << "\t\t\t\t=== Menu Pembayaran ===" << endl;
+                    order.showOrderItem();
+                    cout << "------------------------------------------------------" << endl;
+                    for(int i = 0; i < order.countData(); i++)
+                    {
+                        totalPrice += order.order[i].subtotal;
+                    }
+                    cout << "Total Pesanan : " << totalPrice;
+                    cout << endl;
+                    cout << "Masukan nama customer : ";
+                    cin >> customerName;
+                    cout << "1. Cash" << endl;
+                    cout << "2. Virtual Account" << endl;
+                    cout << "Pilih metode pembayaran : ";
+                    cin >> choose;
+                    if(choose == 1)
+                    {
+                        while(1)
+                        {
+                            cout << "masukan jumlah uang anda : ";
+                            cin >> pay;
+                            if(pay < totalPrice)
+                            {
+                                cout << "uang tidak mencukupi!" << endl << endl;
+                                cout << "ingin melakukan pembayaran lagi? (y/n) : ";
+                                cin >> answer;
+
+                                if(answer == 'n')
+                                    break;
+                            }
+                            else
+                            {
+                                payback = pay - totalPrice;
+                                break;
+                            }
+                        }
+                        
+                        paymentMethod = "Cash";
+                        
+                    }
+                    else if(choose == 2)
+                    {
+                        cout << "Masukan kode virtual account dibawah ini" << endl;
+                        cout << "9837 1239 2390 9324" << endl;
+                        
+                        paymentMethod = "Virtual Account";
+                    }
+                     if(answer == 'n')
+                        break; 
+                    
+                    cout << "konfirmasi pembayaran (Tekan enter!)";
+
+                    for(int i = 0; i < order.countData(); i++)
+                    {
+                         idItem =  order.order[i].idItem;
+                         menuName = order.order[i].menuName;
+                         qty = order.order[i].qty;
+                         subtotal = order.order[i].subtotal;
+
+                        payment.AddItem(idItem, menuName, qty, subtotal);
+                       
+                    }
+
+                    payment.addItemToPayment();
+
+                    payment.addPayment(idUser, staffName, customerName, orderTime, status, paymentMethod, totalPrice, payback);
+                    break;
+                }
+                break;
+            
+            case 3:
+                payment.showPaymentList();
+                break;
+                
             
             default:
                 break;
@@ -295,6 +413,26 @@ int main()
     }
     
 }
+
+
+//algoritma paymentt
+// int main()
+// {
+//     order.addItem(1, "jadsf", 2, 20000);
+//     order.addItem(2, "sdfsdf", 2, 30000);
+
+//     for(int i = 0; i < order.countData(); i++)
+//     {
+//         payment.testAddItem(order.order[i].idItem);
+//     }
+
+//     payment.addItemToPayment();
+//     payment.addPayment(1);
+
+//     payment.showPaymentList();
+    
+
+// }
 
 int getPrice(int id)
 {
