@@ -112,6 +112,52 @@ void Menu::showMenu()
     }
 }
 
+void Menu::selectionASC()
+{
+    DataMenu temp;
+    int iMin;
+
+    for(int i = 0; i < countData()-1; i++)
+    {
+        iMin = i;
+        for(int j = i+1; j < countData(); j++)
+        {
+            if(menu[j].price < menu[iMin].price)
+            {
+                iMin = j;
+            }
+        }
+
+        temp = menu[i];
+        menu[i] = menu[iMin];
+        menu[iMin] = temp;
+
+    }
+}
+
+void Menu::selectionDSC()
+{
+    DataMenu temp;
+    int iMin;
+
+    for(int i = 0; i < countData()-1; i++)
+    {
+        iMin = i;
+        for(int j = i+1; j < countData(); j++)
+        {
+            if(menu[j].price > menu[iMin].price)
+            {
+                iMin = j;
+            }
+        }
+
+        temp = menu[i];
+        menu[i] = menu[iMin];
+        menu[iMin] = temp;
+
+    }
+}
+
 int Menu::countText(string text)
 {
     int i = 0;
@@ -154,12 +200,18 @@ void Menu::searchMenu(string textMenu)
     else 
     {
         int idx;
+        cout << "\t\t\t\t=== Menu Caffe ===" << endl;
         for(int i = 0; i < countData(); i++)
         {
             // cout << checkString(menu[i].menu_item, textMenu) << endl;
             if(checkString(menu[i].menu_item, textMenu))
             {
-                cout << "id menu : " << menu[i].menu_item << endl;
+                cout << "id menu : " << menu[i].id_menu << endl;
+                cout << "price   : " << menu[i].price << endl;
+                cout << "stock   : " << menu[i].stock << endl;
+                cout << "menu_item   : " << menu[i].menu_item << endl;
+                cout << "category   : " << menu[i].category << endl << endl;   
+
             }   
 
         }
@@ -288,8 +340,9 @@ void Menu::updateMenu(int id)
 void Menu::init()
 {
     addMenu("bakso", 10000, 2, "makanan");
-    addMenu("fanta", 12000, 2, "minuman");
-    addMenu("bantal", 12000, 2, "minuman");
+    addMenu("fanta", 15000, 2, "minuman");
+    addMenu("bantal", 19000, 2, "minuman");
+    addMenu("bantal", 9000, 2, "minuman");
 
 }
 

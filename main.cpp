@@ -93,6 +93,7 @@ int main()
                         int qty;
                         int subtotal;
 
+
                         menu.showMenu();
                         cout << "\t\t\t\t=== Keranjang ===" << endl;
                         cout << "masukan id yang ingin dimasukan ke keranjang : ";
@@ -229,8 +230,11 @@ int main()
                     }
                      if(answer == 'n')
                         break; 
-                    
-                    cout << "konfirmasi pembayaran (Tekan enter!)";
+
+                    string test;
+                    cin.ignore();
+                    cout << "\nkonfirmasi pembayaran (Tekan enter!)";
+                    getline(cin, test);
 
                     for(int i = 0; i < order.countData(); i++)
                     {
@@ -342,18 +346,56 @@ int main()
 
                     cout << "\t\t\t\t=== Kelola Menu ===" << endl;
                     cout << "1. Lihat semua menu" << endl;
-                    cout << "2. Tambah menu baru" << endl;
-                    cout << "3. Edit menu" << endl;
-                    cout << "4. Hapus menu" << endl;
-                    cout << "5. kembali ke menu utama" << endl;
+                    cout << "2. Search menu" << endl;
+                    cout << "3. Tambah menu baru" << endl;
+                    cout << "4. Edit menu" << endl;
+                    cout << "5. Hapus menu" << endl;
+                    cout << "6. kembali ke menu utama" << endl;
                     cout << "masukan pilihan : ";
                     cin >> answer;
                     
                         if(answer == 1)
                         {
                             menu.showMenu();
+                            while(1)
+                            {
+                                int choose;
+                               
+                                cout << " === Sorting ===" << endl;
+                                cout << "1. Asccending" << endl;
+                                cout << "2. Descending" << endl;
+                                cout << "3. kembali ke menu utama" << endl;
+                                cout << "masukan pilihan : ";
+                                cin >> choose;
+
+                                if(choose == 1)
+                                {
+                                    menu.selectionASC();
+                                    menu.showMenu();
+                                }
+                                else if(choose == 2)
+                                {
+                                    menu.selectionDSC();
+                                    menu.showMenu();
+                                }
+                                else if(choose == 3)
+                                {
+                                    break;
+                                }
+                            }
                         }
                         else if(answer == 2)
+                        {
+                            string menuName;
+                            menu.showMenu();
+                            cout << "\t\t\t\t=== Search Menu ===" << endl;
+                            cout << "masukan nama menu : ";
+                            cin >>  menuName;
+
+                            menu.searchMenu(menuName);
+                        }
+
+                        else if(answer == 3)
                         {
                            cout << "=== Tambah Menu Baru ===" << endl << endl;
                            cin.ignore();
@@ -377,7 +419,7 @@ int main()
                            menu.addMenu(menu_item, price, stock, category); 
 
                         }
-                        else if(answer == 3)
+                        else if(answer == 4)
                         {
                            int id; 
                            menu.showMenu();
@@ -387,7 +429,7 @@ int main()
                            menu.updateMenu(id);
                            cout << endl;
                         }
-                        else if(answer == 4)
+                        else if(answer == 5)
                         {
                           int id;  
                           menu.showMenu();
@@ -397,7 +439,7 @@ int main()
                           menu.delMenu(id);
 
                         }
-                        else if(answer == 5)
+                        else if(answer == 6)
                         {
                             break;
                         } 
@@ -415,21 +457,24 @@ int main()
 }
 
 
-//algoritma paymentt
+// algoritma paymentt
 // int main()
 // {
-//     order.addItem(1, "jadsf", 2, 20000);
-//     order.addItem(2, "sdfsdf", 2, 30000);
+//     // order.addItem(1, "jadsf", 2, 20000);
+//     // order.addItem(2, "sdfsdf", 2, 30000);
 
-//     for(int i = 0; i < order.countData(); i++)
-//     {
-//         payment.testAddItem(order.order[i].idItem);
-//     }
+//     // for(int i = 0; i < order.countData(); i++)
+//     // {
+//     //     payment.testAddItem(order.order[i].idItem);
+//     // }
 
-//     payment.addItemToPayment();
-//     payment.addPayment(1);
+//     // payment.addItemToPayment();
+//     // payment.addPayment(1);
 
-//     payment.showPaymentList();
+//     // payment.showPaymentList();
+//     menu.showMenu();
+//     menu.selectionDSC();
+//     menu.showMenu();
     
 
 // }

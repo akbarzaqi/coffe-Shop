@@ -33,6 +33,8 @@ public:
     void delMenu(int id);
     void searchMenu(string textMenu);
     void updateMenu(int id);
+    void selectionASC();
+    void selectionDSC();
     bool isEmpty();
     bool isFull();
     bool checkString(string menu_item, string textMenu);

@@ -36,12 +36,34 @@ void OrderItem::addItem(int IdItem, string menuName, int qty, int subtotal)
     }
     else 
     {
-        order[top].idItem = IdItem;
-        order[top].menuName = menuName;
-        order[top].qty = qty;
-        order[top].subtotal = subtotal;
+        bool checkFound = false;
+        int idx;
 
-        top++;
+        for(int i = 0; i < countData(); i++)
+        {
+            if(order[i].idItem == IdItem)
+            {
+                idx = i;
+                checkFound = true;
+                break;
+            }
+        }
+
+        if(!checkFound)
+        {
+            order[top].idItem = IdItem;
+            order[top].menuName = menuName;
+            order[top].qty = qty;
+            order[top].subtotal = subtotal;
+    
+            top++;
+        }
+        else
+        {
+            order[idx].qty += qty;
+            order[idx].subtotal += subtotal;
+        }
+       
     }
 }
 
